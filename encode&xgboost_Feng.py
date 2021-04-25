@@ -144,58 +144,6 @@ onehot_multi_test
 
 onehot_multi_test.to_csv("twohot_multi_test.csv")
 
-"""## train 模板"""
-
-# 注意这里只有single
-X = onehot_single.iloc[:,0:1032]
-Y = onehot_single.iloc[:,1032]
-
-"""**!!!需要记录的结果 初始模型的mse结果,cv grid-search调参后的参数，调参后的mse结果**"""
-
-from sklearn.neighbors import KNeighborsRegressor
-from sklearn.model_selection import train_test_split
-from sklearn.model_selection import cross_val_score
-
-#初始模型的结果
-knn = KNeighborsRegressor(n_neighbors= 5) #需要替换model
-score_mse = cross_val_score(knn, X, Y, cv=5, scoring = "neg_mean_squared_error").mean()  #socring - r2
-score_mse
-
-#调参过程
-from sklearn.model_selection import GridSearchCV
-#这里填写各种要尝试的参数，可以在网上搜有啥
-tuned_parameters = [{'n_neighbors':[1,3,5,7,9,11,13],
-                     'weights':['uniform','distance'],
-                     'algorithm' : ['auto', 'ball_tree',],
-                     'metric' : ["euclidean"]}]
-
-
-grid = GridSearchCV(KNeighborsRegressor(), #需要替换model
-                    tuned_parameters, scoring= "neg_mean_squared_error", cv = 5)
-grid.fit(Xtrain, Ytrain)
-print("The best parameters are %s with a score of %f" % (grid.best_params_,grid.best_score_))
-
-#CV grid-search 过程中每次参数跑出的结果---五次CV中的mean（mse）和std（mse）
-means = grid.cv_results_['mean_test_score']
-stds = grid.cv_results_['std_test_score']
-for mean, std, params in zip(means, stds, grid.cv_results_['params']):
-  print("%f (+/-%0.03f) for %r" % (mean, std * 2, params))
-
-#等有了test数据集，使用最优参数训练整个trian数据集，然后得到的模型用在test上，看结果score
-………………
-………………
-
-#学习曲线 适合于单个参数的调整
-f1_list = []
-for i in range(1,1000,100): #小数 np.linscape()
-  rfc = RandomForestClassifier(n_estimators=i,random_state=420)
-  score = cross_val_score(rfc, X_train, y_train, cv=5, scoring = "neg_mean_squared_error").mean()
-  f1_list.append(score)
-print(max(f1_list),([*range(1,1000,100)][f1_list.index(max(f1_list))]))
-plt.figure(figsize=[20,5])
-plt.plot(range(1,1000,100),f1_list)
-plt.show()
-
 """## train model
 
 ### input
