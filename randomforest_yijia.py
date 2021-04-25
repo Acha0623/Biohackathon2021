@@ -34,7 +34,7 @@ set(single_protein) & set(multiple_protein)  ## No intersection
 
 """##2. Convert protein sequence and secondary structure to "two" hot vector"""
 
-# see encode_twohot.py
+# see feng's py file
 
 """## 3. Prepare data"""
 
