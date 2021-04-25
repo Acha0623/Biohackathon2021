@@ -6,13 +6,16 @@ encode&xgboost_Feng.py
 
 To encode single and multiple data in twohot way, and use xgboost model
 
+
 randomforest_Xie.py
 
 To check data, and use random forest model
 
+
 adaboost_Lin.py
 
 To use adaboost model
+
 
 cnn_Huang.py
 
