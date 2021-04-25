@@ -21,3 +21,6 @@ cnn_Huang.py
 
 To use cnn model
 
+LSTM_He.oy
+
+To use LSTM model
