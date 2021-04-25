@@ -21,6 +21,6 @@ To use adaboost model
 
 To use cnn model
 
-### LSTM_He.oy
+### LSTM_He.py
 
 To use LSTM model
